@@ -244,7 +244,7 @@ func (mng *Manager) request(r *base.Request) {
 
 	// If we failed to correlate an ACK, just drop it.
 	if r.Method == base.ACK {
-		log.Warn("Couldn't correlate ACK to an open transaction. Dropping it.")
+		log.Warn("Couldn't correlate ACK to an open transaction. But *NOT* dropping it.")
 		return
 	}
 
