@@ -1,8 +1,8 @@
 package base
 
 import (
-	"github.com/stefankopieczek/gossip/log"
-	"github.com/stefankopieczek/gossip/utils"
+	"github.com/mozgul/gossip/log"
+	"github.com/mozgul/gossip/utils"
 )
 
 import "bytes"

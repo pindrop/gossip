@@ -2,11 +2,11 @@ package transaction
 
 import (
 	"fmt"
-	"github.com/stefankopieczek/gossip/base"
-	"github.com/stefankopieczek/gossip/log"
-	"github.com/stefankopieczek/gossip/parser"
-	"github.com/stefankopieczek/gossip/timing"
-	"github.com/stefankopieczek/gossip/transport"
+	"github.com/mozgul/gossip/base"
+	"github.com/mozgul/gossip/log"
+	"github.com/mozgul/gossip/parser"
+	"github.com/mozgul/gossip/timing"
+	"github.com/mozgul/gossip/transport"
 	"strings"
 	"testing"
 	"time"

@@ -1,8 +1,8 @@
 package test
 
 import (
-	"github.com/stefankopieczek/gossip/transaction"
-	"github.com/stefankopieczek/gossip/transport"
+	"github.com/mozgul/gossip/transaction"
+	"github.com/mozgul/gossip/transport"
 	"testing"
 )
 
