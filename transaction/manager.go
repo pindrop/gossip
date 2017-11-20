@@ -245,7 +245,6 @@ func (mng *Manager) request(r *base.Request) {
 	// If we failed to correlate an ACK, just drop it.
 	if r.Method == base.ACK {
 		log.Warn("Couldn't correlate ACK to an open transaction. But *NOT* dropping it.")
-		return
 	}
 
 	// Create a new transaction
@@ -293,22 +292,24 @@ func (mng *Manager) request(r *base.Request) {
 	// but I'm not sure how to handle that situation right now.
 
 	// Pretend the user sent us a 100 to send.
-	trying := base.NewResponse(
-		"SIP/2.0",
-		100,
-		"Trying",
-		[]base.SipHeader{},
-		"",
-	)
 
-	base.CopyHeaders("Via", tx.origin, trying)
-	base.CopyHeaders("From", tx.origin, trying)
-	base.CopyHeaders("To", tx.origin, trying)
-	base.CopyHeaders("Call-Id", tx.origin, trying)
-	base.CopyHeaders("CSeq", tx.origin, trying)
-
-	tx.lastResp = trying
-	tx.fsm.Spin(server_input_user_1xx)
+	// Removed auto 100 Trying. App should be able to handle.
+	//trying := base.NewResponse(
+	//	"SIP/2.0",
+	//	100,
+	//	"Trying",
+	//	[]base.SipHeader{},
+	//	"",
+	//)
+    //
+	//base.CopyHeaders("Via", tx.origin, trying)
+	//base.CopyHeaders("From", tx.origin, trying)
+	//base.CopyHeaders("To", tx.origin, trying)
+	//base.CopyHeaders("Call-Id", tx.origin, trying)
+	//base.CopyHeaders("CSeq", tx.origin, trying)
+    //
+	//tx.lastResp = trying
+	//tx.fsm.Spin(server_input_user_1xx)
 
 	mng.requests <- tx
 }
