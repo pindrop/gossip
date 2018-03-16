@@ -108,7 +108,7 @@ func (t *connTable) GetConn(addr string) *connection {
 	t.connRequests <- &connRequest{addr, responseChan}
 	conn := <-responseChan
 
-	log.Debug("Query connection for address %s returns %p", conn)
+	log.Debug("Query connection for address %s returns %p", addr, conn)
 	return conn
 }
 
