@@ -8,6 +8,8 @@ import (
 	"github.com/mozgul/gossip/base"
 	"github.com/mozgul/gossip/log"
 	"github.com/mozgul/gossip/parser"
+
+	"github.com/tevino/abool"
 )
 
 type connection struct {
@@ -17,6 +19,7 @@ type connection struct {
 	parsedMessages chan base.SipMessage
 	parserErrors   chan error
 	output         chan base.SipMessage
+	isOpen         AtomicBool
 }
 
 func NewConn(baseConn net.Conn, output chan base.SipMessage) *connection {
@@ -39,6 +42,7 @@ func NewConn(baseConn net.Conn, output chan base.SipMessage) *connection {
 	connection.parser = parser.NewParser(connection.parsedMessages,
 		connection.parserErrors,
 		connection.isStreamed)
+	connection.isOpen = abool.NewBool(true)
 
 	go connection.read()
 	go connection.pipeOutput()
@@ -47,11 +51,13 @@ func NewConn(baseConn net.Conn, output chan base.SipMessage) *connection {
 }
 
 func (connection *connection) Send(msg base.SipMessage) (err error) {
-	log.Debug("Sending message over connection %p: %s", connection, msg.Short())
 	msgData := msg.String()
+	log.Debug("Sending message over connection %p: %s (Total %v bytes)", connection, msg.Short(), len(msgData))
 	n, err := connection.baseConn.Write([]byte(msgData))
 
 	if err != nil {
+		log.Debug("Connection: %p Received error [%v]", connection, err)
+		connection.Close()
 		return
 	}
 
@@ -64,7 +70,10 @@ func (connection *connection) Send(msg base.SipMessage) (err error) {
 }
 
 func (connection *connection) Close() error {
+	log.Debug("Closing connection %p [%#v]", connection, connection)
+	connection.isOpen.UnSet()
 	connection.parser.Stop()
+	log.Debug("Closing connection %p [%#v]", connection, connection)
 	return connection.baseConn.Close()
 }
 
@@ -75,9 +84,12 @@ func (connection *connection) read() {
 		num, err := connection.baseConn.Read(buffer)
 		if err != nil {
 			// If connections are broken, just let them drop.
-			log.Debug("Lost connection to %s on %s",
+			log.Debug("Lost connection [%p] to %s on %s",
+				connection,
 				connection.baseConn.RemoteAddr().String(),
 				connection.baseConn.LocalAddr().String())
+			connection.Close()
+
 			return
 		}
 

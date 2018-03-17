@@ -48,8 +48,9 @@ func (tcp *Tcp) IsStreamed() bool {
 
 func (tcp *Tcp) getConnection(addr string) (*connection, error) {
 	conn := tcp.connTable.GetConn(addr)
+	log.Debug("Found a connection for address %s; [%#v]", addr, conn)
 
-	if conn == nil {
+	if conn == nil || !conn.isOpen.IsSet() {
 		log.Debug("No stored connection for address %s; generate a new one", addr)
 		raddr, err := net.ResolveTCPAddr("tcp", addr)
 		if err != nil {
