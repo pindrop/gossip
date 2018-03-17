@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"net"
 
+	"github.com/tevino/abool"
+
 	"github.com/mozgul/gossip/base"
 	"github.com/mozgul/gossip/log"
 	"github.com/mozgul/gossip/parser"
-
-	"github.com/tevino/abool"
 )
 
 type connection struct {
@@ -19,7 +19,7 @@ type connection struct {
 	parsedMessages chan base.SipMessage
 	parserErrors   chan error
 	output         chan base.SipMessage
-	isOpen         AtomicBool
+	isOpen         *abool.AtomicBool
 }
 
 func NewConn(baseConn net.Conn, output chan base.SipMessage) *connection {
