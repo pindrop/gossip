@@ -7,11 +7,11 @@ import (
 )
 
 import (
-	"github.com/mozgul/gossip/base"
-	"github.com/mozgul/gossip/log"
-	"github.com/mozgul/gossip/parser"
-	"github.com/mozgul/gossip/testutils"
-	"github.com/mozgul/gossip/timing"
+	"github.com/pindrop/gossip/base"
+	"github.com/pindrop/gossip/log"
+	"github.com/pindrop/gossip/parser"
+	"github.com/pindrop/gossip/testutils"
+	"github.com/pindrop/gossip/timing"
 )
 
 var c_LOG_LEVEL = log.WARN

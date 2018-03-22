@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mozgul/gossip/base"
-	"github.com/mozgul/gossip/log"
+	"github.com/pindrop/gossip/base"
+	"github.com/pindrop/gossip/log"
 )
 
 const c_BUFSIZE int = 65507

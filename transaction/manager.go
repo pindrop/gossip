@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mozgul/gossip/base"
-	"github.com/mozgul/gossip/log"
-	"github.com/mozgul/gossip/timing"
-	"github.com/mozgul/gossip/transport"
+	"github.com/pindrop/gossip/base"
+	"github.com/pindrop/gossip/log"
+	"github.com/pindrop/gossip/timing"
+	"github.com/pindrop/gossip/transport"
 )
 
 var (

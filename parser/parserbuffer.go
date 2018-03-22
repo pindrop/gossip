@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/mozgul/gossip/log"
+	"github.com/pindrop/gossip/log"
 )
 
 // parserBuffer is a specialized buffer for use in the parser package.

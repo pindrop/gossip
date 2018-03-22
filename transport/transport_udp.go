@@ -1,9 +1,9 @@
 package transport
 
 import (
-	"github.com/mozgul/gossip/base"
-	"github.com/mozgul/gossip/log"
-	"github.com/mozgul/gossip/parser"
+	"github.com/pindrop/gossip/base"
+	"github.com/pindrop/gossip/log"
+	"github.com/pindrop/gossip/parser"
 )
 
 import (

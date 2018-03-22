@@ -4,9 +4,9 @@ import (
 	"errors"
 
 	"github.com/discoviking/fsm"
-	"github.com/mozgul/gossip/base"
-	"github.com/mozgul/gossip/log"
-	"github.com/mozgul/gossip/timing"
+	"github.com/pindrop/gossip/base"
+	"github.com/pindrop/gossip/log"
+	"github.com/pindrop/gossip/timing"
 )
 
 // SIP Server Transaction FSM
